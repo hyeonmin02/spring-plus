@@ -1,7 +1,7 @@
 package org.example.expert.domain.todo.controller;
 
 import org.example.expert.domain.common.dto.AuthUser;
-import org.example.expert.domain.common.exception.InvalidRequestException;
+import org.example.expert.domain.common.exception.NotFoundException;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
 import org.example.expert.domain.todo.service.TodoService;
 import org.example.expert.domain.user.dto.response.UserResponse;
@@ -65,13 +65,13 @@ class TodoControllerTest {
 
         // when
         when(todoService.getTodo(todoId))
-                .thenThrow(new InvalidRequestException("Todo not found"));
+                .thenThrow(new NotFoundException("Todo not found"));
 
         // then
         mockMvc.perform(get("/todos/{todoId}", todoId))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.status").value(HttpStatus.OK.name()))
-                .andExpect(jsonPath("$.code").value(HttpStatus.OK.value()))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.status").value(HttpStatus.NOT_FOUND.name()))
+                .andExpect(jsonPath("$.code").value(HttpStatus.NOT_FOUND.value()))
                 .andExpect(jsonPath("$.message").value("Todo not found"));
     }
 }
