@@ -63,4 +63,27 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+    // role 꺼내는 메서드 email 꺼내는 메서드 userId 꺼내는 메서드 추가
+    public Long getUserId(Claims claims) {
+        // 1. JWT의 subject 꺼냄 (String 타입)
+        String subject = claims.getSubject();
+        // 2. String -> Long 변환
+        Long userId = Long.parseLong(subject);
+        return userId;
+    }
+
+    public String getEmail(Claims claims) {
+        // "email" claim 꺼냄
+        String email = claims.get("email", String.class);
+        return email;
+    }
+
+    public UserRole getUserRole(Claims claims) {
+        // claim에서 role 문자열로 꺼냄
+        String role = claims.get("userRole", String.class);
+        // String -> Enum 변환
+        UserRole userRole = UserRole.valueOf(role);
+        return userRole;
+    }
 }
