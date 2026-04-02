@@ -3,7 +3,6 @@ package org.example.expert.domain.todo.service;
 import lombok.RequiredArgsConstructor;
 import org.example.expert.client.WeatherClient;
 import org.example.expert.domain.common.dto.AuthUser;
-import org.example.expert.domain.common.exception.InvalidRequestException;
 import org.example.expert.domain.common.exception.NotFoundException;
 import org.example.expert.domain.todo.dto.request.TodoSaveRequest;
 import org.example.expert.domain.todo.dto.response.TodoResponse;
@@ -20,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -80,9 +80,9 @@ public class TodoService {
         ));
     }
 
-    public TodoResponse getTodo(long todoId) {
+    public TodoResponse getTodo(Long todoId) {
         Todo todo = todoRepository.findByIdWithUser(todoId)
-                .orElseThrow(() -> new NotFoundException("Todo not found"));
+                .orElseThrow(() -> new NotFoundException("Todo Not Found"));
 
         User user = todo.getUser();
 
