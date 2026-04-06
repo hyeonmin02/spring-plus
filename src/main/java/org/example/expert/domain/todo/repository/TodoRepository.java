@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 
-public interface TodoRepository extends JpaRepository<Todo, Long>, TodoCustomRepository {
+public interface TodoRepository extends JpaRepository<Todo, Long>, TodoCustomRepository { // TODO querydsl로 변경해보기
     @Query("SELECT t " +
             "FROM Todo t " +
             "WHERE (:weather IS NULL OR :weather = t.weather) " +
