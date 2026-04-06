@@ -1,15 +1,12 @@
 spring:
-  application:
-    name: spring-plus
-
   datasource:
     url: jdbc:mysql://localhost:3306/spring_plus?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    username: root
+    password: 12345678
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     open-in-view: false
     show-sql: true
     properties:
@@ -18,4 +15,4 @@ spring:
 
 jwt:
   secret:
-    key: ${JWT_SECRET}
+    key: "MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTI="
